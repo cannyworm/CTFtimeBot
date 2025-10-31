@@ -1,0 +1,13 @@
+config.json
+subscribe.json
+test_api.py
+constants.py
+
+venv/
+
+__pycache__/
+
+**/__pycache__/
+
+*.pyc
+*.pyo
