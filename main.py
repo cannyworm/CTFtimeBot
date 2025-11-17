@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import time
 import asyncio
 from config import load_config
-from constants import Token, GUILD_ID 
+from constants import Token, GUILD_ID ,save_config
 
 
 intents = discord.Intents.default()
@@ -15,6 +15,10 @@ intents.reactions = True
 intents.members = True
 client = commands.Bot(command_prefix='!', intents=intents)
 
+@bot.event
+async def on_guild_join(guild):
+    save_config(guild.id)
+    print(f"Updated GUILD_ID → {guild.id}")
 
 def create_ctf_embed(info):
     def format_ctf_time(iso_time: str):
@@ -152,5 +156,7 @@ async def main():
         await client.load_extension("cogs.subscribe") 
         await client.load_extension("cogs.search")
         await client.start(Token)
+
+
 
 asyncio.run(main())
